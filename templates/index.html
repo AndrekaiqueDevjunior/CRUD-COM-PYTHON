@@ -1,0 +1,43 @@
+<!-- {% extends "layout.html" %}
+
+{% block title %}Lista de Usuários{% endblock %}
+
+{% block content %}
+    <h1 class="mt-4">Lista de Usuários</h1>
+    <a class="btn btn-primary mb-3" href="{{ url_for('add_user') }}">Adicionar Usuário</a>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Idade</th>
+                <th>Rua</th>
+                <th>Cidade</th>
+                <th>Número</th>
+                <th>Estado</th>
+                <th>Email</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in datas %}
+            <tr>
+                <td>{{ row.ID }}</td>
+                <td>{{ row.NOME }}</td>
+                <td>{{ row.IDADE }}</td>
+                <td>{{ row.RUA }}</td>
+                <td>{{ row.CIDADE }}</td>
+                <td>{{ row.NUMERO }}</td>
+                <td>{{ row.ESTADO }}</td>
+                <td>{{ row.EMAIL }}</td>
+                <td>
+                    <a class="btn btn-primary" href="{{ url_for('edit_user', id=row.ID) }}">Editar</a>
+                    <a class="btn btn-danger" href="{{ url_for('delete_user', id=row.ID) }}">Deletar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+-->

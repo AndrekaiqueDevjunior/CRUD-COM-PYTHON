@@ -1,0 +1,191 @@
+{% extends "layout.html" %}
+
+{% block title %}Cadastrar Usuário{% endblock %}
+
+{% block content %}
+<style>
+/* CSS para o ícone de "olho" dentro do campo de senha */
+.toggle-password {
+    cursor: pointer;
+}
+
+.toggle-password i {
+    margin: auto;
+}
+
+.input-group-text {
+    background-color: #fff;
+    border-left: none;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+
+    body {
+        font-family: Arial, sans-serif;
+        margin: 10px;
+        background-color: #ffffff;
+        color: #000000;
+    }
+    .content {
+        background-color: #f8f9fa;
+        padding: 20px;
+        border-radius: 10px;
+        width: 80%;
+        max-width: 800px;
+        margin: 20px auto;
+    }
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    label {
+        font-weight: bold;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="number"],
+    select,
+    textarea {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    .form-row {
+        display: flex;
+        gap: 10px;
+    }
+    .form-group {
+        flex: 1;
+    }
+    .checkbox-group {
+        display: flex;
+        gap: 10px;
+    }
+    button[type="submit"] {
+        padding: 10px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+</style>
+
+<script>
+function togglePassword() {
+    var senha = document.getElementById("senha");
+    var togglePassword = document.getElementById("togglePassword");
+    
+    if (senha.type === "password") {
+        senha.type = "text";
+        togglePassword.innerHTML = '<i class="fa fa-eye-slash">Esconder</i>';
+    } else {
+        senha.type = "password";
+        togglePassword.innerHTML = '<i class="fa fa-eye">Mostrar</i>';
+    }
+}
+</script>
+
+<div class="content">
+    <h1>Cadastrar Usuário</h1>
+    <form action="{{ url_for('cadastro_usuario') }}" method="post" onsubmit="return checkEmail()">
+        <div class="form-group">
+            <label for="inputNome">Nome Completo</label>
+            <input type="text" id="inputNome" name="nome" placeholder="Digite seu nome completo" required>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="inputIdade">Idade</label>
+                <input type="number" id="inputIdade" name="idade" placeholder="Digite sua idade">
+            </div>
+            <div class="form-group">
+                <label for="inputEmail">Email</label>
+                <input type="email" id="inputEmail" name="email" placeholder="Digite seu email" required>
+                <small id="emailHelp" class="form-text text-danger"></small>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="inputRua">Rua</label>
+                <input type="text" id="inputRua" name="rua" placeholder="Digite o nome da sua rua">
+            </div>
+            <div class="form-group">
+                <label for="inputCidade">Cidade</label>
+                <input type="text" id="inputCidade" name="cidade" placeholder="Digite sua cidade">
+            </div>
+            <div class="form-group">
+                <label for="inputNumero">Número</label>
+                <input type="text" id="inputNumero" name="numero" placeholder="Digite o número">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="inputEstado">Estado</label>
+                <select id="inputEstado" name="estado">
+                    <option value="" selected>Selecione o estado</option>
+                    <option value="AC">Acre</option>
+                    <option value="AL">Alagoas</option>
+                    <option value="AP">Amapá</option>
+                    <option value="AM">Amazonas</option>
+                    <option value="BA">Bahia</option>
+                    <option value="CE">Ceará</option>
+                    <option value="DF">Distrito Federal</option>
+                    <option value="ES">Espírito Santo</option>
+                    <option value="GO">Goiás</option>
+                    <option value="MA">Maranhão</option>
+                    <option value="MT">Mato Grosso</option>
+                    <option value="MS">Mato Grosso do Sul</option>
+                    <option value="MG">Minas Gerais</option>
+                    <option value="PA">Pará</option>
+                    <option value="PB">Paraíba</option>
+                    <option value="PR">Paraná</option>
+                    <option value="PE">Pernambuco</option>
+                    <option value="PI">Piauí</option>
+                    <option value="RJ">Rio de Janeiro</option>
+                    <option value="RN">Rio Grande do Norte</option>
+                    <option value="RS">Rio Grande do Sul</option>
+                    <option value="RO">Rondônia</option>
+                    <option value="RR">Roraima</option>
+                    <option value="SC">Santa Catarina</option>
+                    <option value="SP">São Paulo</option>
+                    <option value="SE">Sergipe</option>
+                    <option value="TO">Tocantins</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="senha">Senha</label>
+            <div class="input-group">
+                <input type="password" class="form-control" id="senha" name="senha" placeholder="Digite sua senha" required>
+                <div class="input-group-append">
+                    <span class="input-group-text" id="togglePassword" onclick="togglePassword()">
+                        <i class="fa fa-eye">Mostrar Senha</i>
+                    </span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="gridCheck" required>
+                <label class="form-check-label" for="gridCheck">
+                    Aceito os termos e condições
+                </label>
+            </div>
+        </div>
+        <button type="submit">Cadastrar</button>
+    </form>
+</div>
+{% endblock %}

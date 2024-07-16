@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Usuários</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css">
+    <link href="https://fonts.googleapis.com/css?family=Titillium+Web:300" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            text-align: center;
+        }
+        form {
+            max-width: 400px;
+            margin: 20px auto;
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        input[type="text"], input[type="email"], input[type="number"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin: 5px 0 10px 0;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        button[type="submit"] i {
+            margin-left: 10px;
+        }
+
+        /* Estilos do menu lateral */
+        .main-menu {
+            background: #212121;
+            border-right: 1px solid #e5e5e5;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            overflow: hidden;
+            transition: width .3s;
+            z-index: 1000;
+        }
+        .main-menu ul {
+            margin: 0;
+            padding: 0;
+        }
+        .main-menu li {
+            position: relative;
+            width: 60px; /* Largura ajustada para ícones */
+        }
+        .main-menu li a {
+            display: block;
+            padding: 10px 0;
+            text-align: center;
+            color: #999;
+            font-size: 14px;
+            text-decoration: none;
+        }
+        .main-menu li:hover a {
+            color: #fff;
+            background-color: #000;
+        }
+        .main-menu .nav-icon {
+            font-size: 2em;
+            line-height: 36px;
+        }
+        .main-menu .nav-text {
+            display: none;
+        }
+        .main-menu .logout {
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            width: 100%;
+        }
+
+        /* Media Queries para ajustar o layout responsivo */
+        @media only screen and (max-width: 768px) {
+            .main-menu {
+                width: 100px;
+            }
+            .main-menu .nav-text {
+                display: none;
+            }
+            .main-menu.expanded {
+                width: 250px;
+                overflow: visible;
+            }
+        }
+
+        @media only screen and (max-width: 480px) {
+            .main-menu {
+                width: 60px;
+            }
+            .main-menu .nav-text {
+                display: none;
+            }
+            .main-menu.expanded {
+                width: 200px;
+                overflow: visible;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- FORMULÁRIO DE CADASTRO -->
+    <h1>Adicionar Usuário</h1>
+    <form action="{{ url_for('add_user') }}" method="post">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required><br>
+        <label for="idade">Idade:</label>
+        <input type="number" id="idade" name="idade" required><br>
+        <label for="rua">Rua:</label>
+        <input type="text" id="rua" name="rua" required><br>
+        <label for="cidade">Cidade:</label>
+        <input type="text" id="cidade" name="cidade" required><br>
+        <label for="numero">Número:</label>
+        <input type="number" id="numero" name="numero" required><br>
+        <label for="estado">Estado:</label>
+        <input type="text" id="estado" name="estado" required><br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br>
+        <button type="submit">Adicionar <i class="bi bi-plus-circle"></i></button>
+    </form>
+
+
+
+    <!-- -->
+    <!-- MENU LATERAL -->
+    <nav class="main-menu">
+        <ul>
+            <li><a href="/menu"><i class="fa fa-home fa-2x"></i><span class="nav-text">Home</span></a></li>
+            <li><a href="#"><i class="fa fa-globe fa-2x"></i><span class="nav-text">Global Surveyors</span></a></li>
+            <li><a href="#"><i class="fa fa-comments fa-2x"></i><span class="nav-text">Group Hub Forums</span></a></li>
+            <li><a href="#"><i class="fa fa-camera-retro fa-2x"></i><span class="nav-text">Survey Photos</span></a></li>
+            <li><a href="#"><i class="fa fa-film fa-2x"></i><span class="nav-text">Surveying Tutorials</span></a></li>
+            <li><a href="#"><i class="fa fa-cogs fa-2x"></i><span class="nav-text">Tools & Resources</span></a></li>
+            <li><a href="#"><i class="fa fa-info fa-2x"></i><span class="nav-text">Documentação</span></a></li>
+        </ul>
+        <ul class="logout">
+            <li><a href="{{ url_for('logout') }}"><i class="fa fa-power-off fa-2x"></i><span class="nav-text">Sair</span></a></li>
+        </ul>
+    </nav>
+</body>
+</html>
